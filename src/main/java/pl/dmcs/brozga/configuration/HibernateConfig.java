@@ -18,7 +18,7 @@ import java.util.Properties;
 
 
 @Configuration
-//@EnableJpaRepositories(basePackages={"pl.dmcs.brozga.dao"})
+@EnableJpaRepositories(basePackages={"pl.dmcs.brozga.repository"})
 @EnableTransactionManagement
 public class HibernateConfig {
 
