@@ -21,19 +21,24 @@
     </tr>
     <tr>
         <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
-        <td><form:input path="name"/></td>
+        <td><form:input path="name"/></td
+        <td><form:errors path="name"/></td>
     </tr>
     <tr>
         <td><form:label path="surname"><spring:message code="label.surname"/></form:label></td>
         <td><form:input path="surname"/></td>
+        <td><form:errors path="surname"/></td>
     </tr>
     <tr>
         <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
         <td><form:input path="email"/></td>
+        <td><form:errors path="email"/></td>
+
     </tr>
     <tr>
         <td><form:label path="phoneNumber"><spring:message code="label.phoneNumber"/></form:label></td>
         <td><form:input path="phoneNumber"/></td>
+        <td><form:errors path="phoneNumber"/></td>
     </tr>
     <tr>
         <td colspan="2">

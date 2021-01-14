@@ -2,6 +2,7 @@ package pl.dmcs.brozga.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="appuser") //Table name if not name of class will be used
@@ -13,7 +14,9 @@ public class AppUser {
 
     @Column(name="name", nullable=false) // Column name
 
+
     private String name;
+
     private String surname;
     private String email;
     private String phoneNumber;
