@@ -2,6 +2,7 @@ package pl.dmcs.brozga.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,10 +15,14 @@ public class AppUser {
 
     @Column(name="name", nullable=false) // Column name
 
-
+    @NotNull
+    @Size(min=2, max=30, message = "{error.size.name}")
     private String name;
 
+    @NotNull
+    @Size(min=2, max=30, message = "{error.size.surname}")
     private String surname;
+
     private String email;
     private String phoneNumber;
 

@@ -16,6 +16,7 @@ import pl.dmcs.brozga.service.AppUserService;
 import pl.dmcs.brozga.validator.AppUserValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class AppUserController {
@@ -49,7 +50,7 @@ public class AppUserController {
 
 
    @RequestMapping(value="/addAppUser",method = RequestMethod.POST)
-   public String addAppUser(@ModelAttribute("appUser") AppUser appUser, BindingResult result, Model model){ //appUser - JSP form, addAppUser - JSP form, transformation to java object from Spring
+   public String addAppUser(@Valid @ModelAttribute("appUser") AppUser appUser, BindingResult result, Model model){ //appUser - JSP form, addAppUser - JSP form, transformation to java object from Spring
 
         System.out.println("Name" + appUser.getName() + "Surname" + appUser.getSurname()
                 +"Phone Number" + appUser.getPhoneNumber() + "Email" + appUser.getEmail());
