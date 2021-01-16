@@ -12,7 +12,7 @@ public class SpringInit extends AbstractAnnotationConfigDispatcherServletInitial
 
 
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{SpringConfig.class, HibernateConfig.class};
+        return new Class[]{SecurityConfiguration.class, SpringConfig.class, HibernateConfig.class};
     }
 
 

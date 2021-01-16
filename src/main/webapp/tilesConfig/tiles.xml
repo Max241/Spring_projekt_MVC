@@ -8,22 +8,37 @@
 
 <tiles-definitions>
     <definition name="base.definition"
-                template="/layout.jsp">
+                template="/views/layout.jsp">
         <put-attribute name="title" value="" /> <!-- empty -> it wil change -->
-        <put-attribute name="header" value="/header.jsp" />
-        <put-attribute name="menu" value="/menu.jsp" />
+        <put-attribute name="header" value="/views/header.jsp" />
+        <put-attribute name="menu" value="/views/menu.jsp" />
         <put-attribute name="body" value="" />  <!-- empty -> it wil change -->
-        <put-attribute name="footer" value="/footer.jsp" />
+        <put-attribute name="footer" value="/views/footer.jsp" />
     </definition>
 
     <definition name="appUser" extends="base.definition">
         <put-attribute name="title" value="AppUser" />
-        <put-attribute name="body" value="/appUser.jsp" /> <!-- definition name cannot be the same as value -->
+        <put-attribute name="body" value="/views/appUser.jsp" /> <!-- definition name cannot be the same as value -->
     </definition>
 
     <definition name="hello" extends="base.definition">
         <put-attribute name="title" value="Hello" />
-        <put-attribute name="body" value="/hello.jsp" />
+        <put-attribute name="body" value="/views/hello.jsp" />
+    </definition>
+
+    <definition name="exampleOne" extends="base.definition">
+        <put-attribute name="title" value="ExampleOne" />
+        <put-attribute name="body" value="/views/exampleOne.jsp" />
+    </definition>
+
+    <definition name="exampleTwo" extends="base.definition">
+        <put-attribute name="title" value="ExampleTwo" />
+        <put-attribute name="body" value="/views/exampleTwo.jsp" />
+    </definition>
+
+    <definition name="exampleThree" extends="base.definition">
+        <put-attribute name="title" value="ExampleThree" />
+        <put-attribute name="body" value="/views/exampleThree.jsp" />
     </definition>
 
 </tiles-definitions>
