@@ -28,11 +28,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/exampleOne*").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/exampleTwo*").access("hasRole('ROLE_STUDENT')")
                 .antMatchers("/exampleThree*").permitAll()
-                .and().formLogin().permitAll(); // with default login page
-                /*.and().formLogin().loginPage("/login").permitAll() // with custom login page
+                /*.and().formLogin().permitAll(); // with default login page*/
+                .and().formLogin().loginPage("/login").permitAll() // with custom login page
                 .usernameParameter("login").passwordParameter("password")
                 .failureForwardUrl("/login.html?error")
                 .and().logout().logoutSuccessUrl("/login.html?logout")
-                .and().exceptionHandling().accessDeniedPage("/accessDenied");*/
+                .and().exceptionHandling().accessDeniedPage("/accessDenied");
     }
 }
