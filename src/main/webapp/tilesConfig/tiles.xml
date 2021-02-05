@@ -37,18 +37,23 @@
     </definition>
 
     <definition name="exampleThree" extends="base.definition">
-        <put-attribute name="title" value="ExampleThree" />
-        <put-attribute name="body" value="/views/exampleThree.jsp" />
+        <put-attribute name="title" value="ExampleThree"/>
+        <put-attribute name="body" value="/views/exampleThree.jsp"/>
     </definition>
 
     <definition name="login" extends="base.definition">
-        <put-attribute name="title" value="Login" />
-        <put-attribute name="body" value="/views/login.jsp" />
+        <put-attribute name="title" value="Login"/>
+        <put-attribute name="body" value="/views/login.jsp"/>
+    </definition>
+
+    <definition name="appUserRole" extends="base.definition">
+        <put-attribute name="title" value="AppUserRole"/>
+        <put-attribute name="body" value="/views/appUserRole.jsp"/>
     </definition>
 
     <definition name="accessDenied" extends="base.definition">
-        <put-attribute name="title" value="AccessDenied" />
-        <put-attribute name="body" value="/views/accessDenied.jsp" />
+        <put-attribute name="title" value="AccessDenied"/>
+        <put-attribute name="body" value="/views/accessDenied.jsp"/>
     </definition>
 
 </tiles-definitions>

@@ -1,5 +1,7 @@
 package pl.dmcs.brozga.service;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import pl.dmcs.brozga.model.AppUser;
 
 import java.util.List;
@@ -7,9 +9,20 @@ import java.util.List;
 public interface AppUserService {
 
 
-    public void addAppUser(AppUser user);
-    public void editAppUser(AppUser user);
-    public List<AppUser> listAppUser();
-    public void removeAppUser(long id);
-    public AppUser getAppUser(long id);
+    @Secured("ROLE_ADMIN")
+    void addAppUser(AppUser user);
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR (#appUser.login == principal.username)")
+    void editAppUser(AppUser user);
+
+    List<AppUser> listAppUser();
+
+    @Secured("ROLE_ADMIN")
+    void removeAppUser(long id);
+
+    AppUser getAppUser(long id);
+
+    AppUser findByLogin(String login);
+
+
 }

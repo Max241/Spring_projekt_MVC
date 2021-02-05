@@ -23,6 +23,7 @@ import java.util.Locale;
 @ComponentScan("pl.dmcs.brozga")
 public class SpringConfig implements WebMvcConfigurer {
 
+    
     //Configuration - TilesConfig
     @Bean
     public TilesConfigurer tilesConfigurer () {

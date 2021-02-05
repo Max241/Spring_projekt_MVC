@@ -13,33 +13,48 @@
 
 <body>
 <h1><spring:message code="label.appUser"/></h1>
-<form:form method="post" action ="addAppUser.html" modelAttribute="appUser">
+<form:form method="post" action="addAppUser.html" modelAttribute="appUser">
 
-<table>
-    <tr>
-        <td><form:hidden path="id"/>
-    </tr>
-    <tr>
-        <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
-        <td><form:input path="name"/></td
-        <td><form:errors path="name"/></td>
-    </tr>
-    <tr>
-        <td><form:label path="surname"><spring:message code="label.surname"/></form:label></td>
-        <td><form:input path="surname"/></td>
-        <td><form:errors path="surname"/></td>
-    </tr>
-    <tr>
-        <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
-        <td><form:input path="email"/></td>
-        <td><form:errors path="email"/></td>
+    <table>
+        <tr>
+            <td><form:hidden path="id"/>
+        </tr>
+        <tr>
+            <td><form:label path="login"><spring:message code="label.login"/></form:label></td>
+            <td><form:input path="login"/></td>
+            <td><form:errors path="login"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="password"><spring:message code="label.password"/></form:label></td>
+            <td><form:input type="password" path="password"/></td>
+            <td><form:errors path="password"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="enabled"><spring:message code="label.enabled"/></form:label></td>
+            <td><form:checkbox path="enabled"/></td>
+            <td><form:errors path="enabled"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
+            <td><form:input path="name"/></td
+            <td><form:errors path="name"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="surname"><spring:message code="label.surname"/></form:label></td>
+            <td><form:input path="surname"/></td>
+            <td><form:errors path="surname"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
+            <td><form:input path="email"/></td>
+            <td><form:errors path="email"/></td>
 
-    </tr>
-    <tr>
-        <td><form:label path="phoneNumber"><spring:message code="label.phoneNumber"/></form:label></td>
-        <td><form:input path="phoneNumber"/></td>
-        <td><form:errors path="phoneNumber"/></td>
-    </tr>
+        </tr>
+        <tr>
+            <td><form:label path="phoneNumber"><spring:message code="label.phoneNumber"/></form:label></td>
+            <td><form:input path="phoneNumber"/></td>
+            <td><form:errors path="phoneNumber"/></td>
+        </tr>
     <tr>
         <td colspan="2">
             <c:if test="${appUser.id==0}">
