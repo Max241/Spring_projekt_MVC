@@ -18,14 +18,17 @@ public class AppUserRoleListConverter implements Converter<String[], Set<AppUser
     }
 
     @Override
-    public Set<AppUserRole
-            > convert(String[] source) {
+    public Set<AppUserRole> convert(String[] source) {
 
         Set<AppUserRole> userRoleList = new HashSet<AppUserRole>(0);
 
+        //Set<AppUserRole> appUserRoles = new;
+
         for (int i = 0; i < source.length; i++) {
             //System.out.println("role id: " + source[i]);
-            userRoleList.add(appUserRoleService.getAppUserRole(Integer.parseInt(source[i])));
+            userRoleList.add(appUserRoleService.getAppUserRole(Long.parseLong(source[i])));
+            //appUserRoles.add(appUserRoleService.getAppUserRole(Long.parseLong(source)));
+            // appUserRoles.add(appUserRoleService.getAppUserRole(Long.parseLong(source)));
         }
 
         return userRoleList;

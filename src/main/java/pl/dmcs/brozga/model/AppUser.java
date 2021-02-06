@@ -1,6 +1,9 @@
 package pl.dmcs.brozga.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,6 +39,7 @@ public class AppUser {
     private String login;
 
     @NotNull
+    @JsonIgnore
     private String password;
 
     private boolean enabled;
@@ -44,6 +48,7 @@ public class AppUser {
     private Set<AppUserRole> appUserRole = new HashSet<AppUserRole>(0);
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Pesel pesel;
 
     public Address getAddress() {

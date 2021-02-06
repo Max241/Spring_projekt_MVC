@@ -3,8 +3,8 @@
 DIV.header {
     color: black;
     background-image: url('../images/header2.jpg');
-    background-size:100% 100%;;
-    background-repeat: repeat;
+    background-size: 100% 100%;;
+    background-repeat: no-repeat;
 
 
 }

@@ -16,6 +16,7 @@ public class Address {
     private String postalCode;
 
     //@JoinTable(name="appuser_address",joinColumns = @JoinColumn(name="appuser_id"),inverseJoinColumns = @JoinColumn(name="address_id"))
+    
 
     @OneToMany(mappedBy = "address")
     private List<AppUser> appUserList;

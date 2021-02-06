@@ -1,5 +1,7 @@
 package pl.dmcs.brozga.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Pesel {
 
     String PESEL;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "pesel")
     private AppUser appUser;
 
