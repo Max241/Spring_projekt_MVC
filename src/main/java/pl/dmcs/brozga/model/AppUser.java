@@ -16,7 +16,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    
+
     @NotNull
     @Size(min = 2, max = 30, message = "{error.size.name}")
     @Column(name = "name", nullable = false) // Column name
@@ -43,6 +43,28 @@ public class AppUser {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AppUserRole> appUserRole = new HashSet<AppUserRole>(0);
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pesel pesel;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @ManyToOne
+    private Address address;
+
+    
+    public Pesel getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(Pesel pesel) {
+        this.pesel = pesel;
+    }
 
     public String getName() {
         return name;

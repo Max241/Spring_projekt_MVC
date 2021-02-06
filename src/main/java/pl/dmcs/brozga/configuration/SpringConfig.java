@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -15,7 +16,13 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import pl.dmcs.brozga.service.AddressService;
+import pl.dmcs.brozga.service.AppUserRoleService;
+import pl.dmcs.brozga.utils.AddressConverter;
+import pl.dmcs.brozga.utils.AppUserRoleConverter;
+import pl.dmcs.brozga.utils.AppUserRoleListConverter;
 
+import javax.annotation.Resource;
 import java.util.Locale;
 
 @Configuration
@@ -90,6 +97,37 @@ public class SpringConfig implements WebMvcConfigurer {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
+
+    @Resource(name = "addressService")
+    private AddressService addressService;
+
+    @Resource(name = "appUserRoleService")
+    private AppUserRoleService appUserRoleService;
+
+    @Override
+    public void addFormatters(FormatterRegistry formatterRegistry) {
+        formatterRegistry.addConverter(getMyAddressConverter());
+        formatterRegistry.addConverter(getMyUserRoleConverter());
+        formatterRegistry.addConverter(getMyUserRoleListConverter());
+    }
+
+
+    @Bean
+    public AddressConverter getMyAddressConverter() {
+
+        return new AddressConverter(addressService);
+    }
+
+    @Bean
+    public AppUserRoleConverter getMyUserRoleConverter() {
+        return new AppUserRoleConverter(appUserRoleService);
+    }
+
+    @Bean
+    public AppUserRoleListConverter getMyUserRoleListConverter() {
+        return new AppUserRoleListConverter(appUserRoleService);
+    }
+
 }
 
 

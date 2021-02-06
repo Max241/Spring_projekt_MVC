@@ -23,6 +23,8 @@
 <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
     <a href="/exampleOne.html"><spring:message code="label.example"/> 1</a>
     <br/>
+    <a href="/addresses.html"><spring:message code="label.address"/></a>
+    <br/>
 </sec:authorize>
 
 <sec:authorize access="hasRole('ROLE_STUDENT')">

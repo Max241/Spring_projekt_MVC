@@ -50,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // "hasRole('ADMIN')" is the same as "hasRole('ROLE_ADMIN')" and "hasAuthority('ROLE_ADMIN')"
                 .antMatchers("/exampleOne*").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/exampleTwo*").access("hasRole('ROLE_STUDENT')")
+                .antMatchers("/address*").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/exampleThree*").permitAll()
                 /*.and().formLogin().permitAll(); // with default login page*/
                 .and().formLogin().loginPage("/login").permitAll() // with custom login page

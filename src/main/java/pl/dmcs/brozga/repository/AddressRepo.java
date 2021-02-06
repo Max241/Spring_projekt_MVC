@@ -2,14 +2,12 @@ package pl.dmcs.brozga.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.dmcs.brozga.model.AppUserRole;
+import pl.dmcs.brozga.model.Address;
 
 import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface AppUserRoleRepo extends JpaRepository<AppUserRole, Long> {
-    AppUserRole findByRole(String role);
-
-    AppUserRole findById(Long id);
+public interface AddressRepo extends JpaRepository<Address, Long> {
+    Address findById(long id);
 }

@@ -8,7 +8,7 @@ import pl.dmcs.brozga.repository.AppUserRoleRepo;
 
 import java.util.List;
 
-@Service
+@Service("appUserRoleService")
 public class AppUserRoleServiceImpl implements AppUserRoleService {
 
     private AppUserRoleRepo appUserRoleRepository;
@@ -25,6 +25,11 @@ public class AppUserRoleServiceImpl implements AppUserRoleService {
 
     @Transactional
     public List<AppUserRole> listAppUserRole() {
+        return appUserRoleRepository.findAll();
+    }
+
+    @Transactional
+    public List<AppUserRole> getAllAppUserRoles() {
         return appUserRoleRepository.findAll();
     }
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pl.dmcs.brozga.model.AppUser;
+import pl.dmcs.brozga.service.AddressService;
+import pl.dmcs.brozga.service.AppUserRoleService;
 import pl.dmcs.brozga.service.AppUserService;
 import pl.dmcs.brozga.validator.AppUserValidator;
 
@@ -22,31 +24,39 @@ import javax.validation.Valid;
 public class AppUserController {
 
     private AppUserService appUserService;
+    private AddressService addressService;
+    private AppUserRoleService appUserRoleService;
+
 
     private AppUserValidator appUserValidator = new AppUserValidator();
 
     @Autowired
-    public AppUserController(AppUserService appUserService)
-    {this.appUserService = appUserService;}
+    public AppUserController(AppUserService appUserService, AddressService addressService, AppUserRoleService appUserRoleService) {
+        this.appUserService = appUserService;
+        this.addressService = addressService;
+        this.appUserRoleService = appUserRoleService;
+    }
 
-    @RequestMapping(value ="/appUsers")
+    @RequestMapping(value = "/appUsers")
     public String showAppUsers(Model model, HttpServletRequest request) {
 
-        int appUserId = ServletRequestUtils.getIntParameter(request, "appUserId", -1 );
+        int appUserId = ServletRequestUtils.getIntParameter(request, "appUserId", -1);
 
-        if(appUserId > 0)
-            model.addAttribute("appUser", appUserService.getAppUser(appUserId));
-        else
-            model.addAttribute("appUser",new AppUser());
+        if (appUserId > 0) {
+            AppUser appUser = appUserService.getAppUser(appUserId);
+            appUser.setPassword("");
+            appUser.setAddress(addressService.getAddress(appUserService.getAppUser(appUserId).getAddress().getId()));
+            model.addAttribute("selectedAddress", appUserService.getAppUser(appUserId).getAddress().getId());
+            model.addAttribute("appUser", appUser);
+        } else
+            model.addAttribute("appUser", new AppUser());
 
-        model.addAttribute("appUserList",appUserService.listAppUser());
+        model.addAttribute("appUserList", appUserService.listAppUser());
+        model.addAttribute("appUserRoleList", appUserRoleService.listAppUserRole());
+        model.addAttribute("addressesList", addressService.listAddress());
 
         return "appUser";
-
-      //  return new ModelAndView("appUser", "appUser", new AppUser()); // JPS file, model name, new object
-        }
-
-
+    }
 
 
    @RequestMapping(value="/addAppUser",method = RequestMethod.POST)
@@ -57,19 +67,21 @@ public class AppUserController {
 
         appUserValidator.validate(appUser,result);
 
-        if(result.getErrorCount() == 0){
-            if(appUser.getId()==0)
-                appUserService.addAppUser(appUser);
-            else
-                appUserService.editAppUser(appUser);
+       if (result.getErrorCount() == 0) {
+           if (appUser.getId() == 0)
+               appUserService.addAppUser(appUser);
+           else
+               appUserService.editAppUser(appUser);
 
-            return "redirect:appUsers.html";
-        }
+           return "redirect:appUsers.html";
+       }
 
-        model.addAttribute("appUserList",appUserService.listAppUser());
-        return "appUser";
+       model.addAttribute("appUserList", appUserService.listAppUser());
+       model.addAttribute("addressesList", addressService.listAddress());
+       model.addAttribute("appUserRoleList", appUserRoleService.listAppUserRole());
+       return "appUser";
 
-    }
+   }
 
     @RequestMapping("/delete/{appUserId}")
     public String deleteUser(@PathVariable("appUserId") Long appUserId) {

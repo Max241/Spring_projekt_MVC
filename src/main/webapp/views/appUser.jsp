@@ -55,19 +55,40 @@
             <td><form:input path="phoneNumber"/></td>
             <td><form:errors path="phoneNumber"/></td>
         </tr>
-    <tr>
-        <td colspan="2">
-            <c:if test="${appUser.id==0}">
-                <input type="submit" value="<spring:message code="label.addAppUser"/>"/>
-            </c:if>
-            <c:if test="${appUser.id!=0}">
-                <input type="submit" value="<spring:message code="label.editAppUser"/>"/>
-            </c:if>
-        </td>
-    </tr>
-</table>
+        <tr>
+            <td><form:label path="pesel.PESEL"><spring:message code="label.pesel"/></form:label></td>
+            <td><form:input path="pesel.PESEL"/></td>
+            <td><form:errors path="pesel"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="address"><spring:message code="label.address"/></form:label></td>
+            <td><form:select path="address">
+                <c:forEach items="${addressesList}" var="address">
+                    <option value="${address.id}" ${address.id == selectedAddress ? 'selected="selected"' : ''}>${address.street}</option>
+                </c:forEach>
+            </form:select></td>
+            <td><form:errors path="address"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="appUserRole"><spring:message code="label.role"/></form:label></td>
+            <td><form:select path="appUserRole" multiple="true">
+                <form:options items="${appUserRoleList}" itemValue="id" itemLabel="role"/>
+            </form:select></td>
+            <td><form:errors path="appUserRole"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <c:if test="${appUser.id==0}">
+                    <input type="submit" value="<spring:message code="label.addAppUser"/>"/>
+                </c:if>
+                <c:if test="${appUser.id!=0}">
+                    <input type="submit" value="<spring:message code="label.editAppUser"/>"/>
+                </c:if>
+            </td>
+        </tr>
+    </table>
     <h3><spring:message code="label.userList"/></h3>
-    <c:if  test="${!empty appUserList}">
+    <c:if test="${!empty appUserList}">
         <table class="data">
             <tr>
                 <th><spring:message code="label.name"/></th>

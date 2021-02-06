@@ -56,4 +56,10 @@
         <put-attribute name="body" value="/views/accessDenied.jsp"/>
     </definition>
 
+    <definition name="address" extends="base.definition">
+        <put-attribute name="title" value="Address"/>
+        <put-attribute name="body" value="/views/address.jsp"/>
+    </definition>
+
+
 </tiles-definitions>
