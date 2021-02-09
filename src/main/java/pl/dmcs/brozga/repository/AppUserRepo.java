@@ -6,6 +6,7 @@ import pl.dmcs.brozga.model.AppUser;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @Transactional
@@ -13,11 +14,12 @@ import java.util.List;
 public interface AppUserRepo extends JpaRepository<AppUser, Long> {
 
     List<AppUser> findBySurname(String surname);
+
     AppUser findById(long id);
 
+    AppUser findByEmail(String email);
+
     AppUser findByLogin(String login);
-
-
 
 
 }

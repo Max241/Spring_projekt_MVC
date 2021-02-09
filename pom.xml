@@ -146,7 +146,11 @@
             <version>5.4.2</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13</version>
+        </dependency>
 
         <!--Need with java 15 without it hibernate is not working
                 <dependency>

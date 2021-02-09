@@ -24,5 +24,7 @@ public interface AppUserService {
 
     AppUser findByLogin(String login);
 
+    AppUser getAppUserByEmail(String email);
+
 
 }

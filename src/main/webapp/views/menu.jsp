@@ -10,10 +10,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <p><spring:message code="label.menu"/></p>
-<sec:authorize access="isAnonymous()">
-    <a href="/login.html"><spring:message code="label.login"/></a>
-    <br/>
-</sec:authorize>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <a href="/appUsers.html"><spring:message code="label.title"/></a>
     <br/>
@@ -38,7 +34,7 @@
 
 
 <br/>
-<script>
+<%--<script>
     function formSubmit() {
         document.getElementById("logoutForm").submit();
     }
@@ -46,14 +42,14 @@
 <!-- csrf for log out-->
 <form action="/logout" method="post" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
+</form>--%>
 
 <br/>
-<div>
+<%--<div>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <p>
             <spring:message code="label.welcome"/> : ${pageContext.request.userPrincipal.name} |
             <a href="javascript:formSubmit()"> Logout</a>
         </p>
     </c:if>
-</div>
+</div>--%>

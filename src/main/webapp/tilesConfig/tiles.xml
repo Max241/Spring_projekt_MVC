@@ -11,6 +11,7 @@
                 template="/views/layout.jsp">
         <put-attribute name="title" value="" /> <!-- empty -> it wil change -->
         <put-attribute name="header" value="/views/header.jsp" />
+        <put-attribute name="navbar" value="/views/navbar.jsp"/>
         <put-attribute name="menu" value="/views/menu.jsp" />
         <put-attribute name="body" value="" />  <!-- empty -> it wil change -->
         <put-attribute name="footer" value="/views/footer.jsp" />
@@ -44,6 +45,11 @@
     <definition name="login" extends="base.definition">
         <put-attribute name="title" value="Login"/>
         <put-attribute name="body" value="/views/login.jsp"/>
+    </definition>
+
+    <definition name="register" extends="base.definition">
+        <put-attribute name="title" value="Register"/>
+        <put-attribute name="body" value="/views/register.jsp"/>
     </definition>
 
     <definition name="appUserRole" extends="base.definition">

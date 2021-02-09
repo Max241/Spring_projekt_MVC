@@ -13,7 +13,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><spring:message code="label.titleAddress"/></title>
+    <title><spring:message code="label.address"/></title>
 </head>
 <body>
 <h2><spring:message code="label.address"/></h2>

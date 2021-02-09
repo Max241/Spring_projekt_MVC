@@ -37,6 +37,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Transactional
+    public AppUser getAppUserByEmail(String email) {
+        return appUserRepo.findByEmail(email);
+    }
+
+    @Transactional
     public List<AppUser> listAppUser() {
         return appUserRepo.findAll();
     }

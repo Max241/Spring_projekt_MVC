@@ -3,6 +3,7 @@ package pl.dmcs.brozga.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,7 @@ public class AppUser {
 
 
     @NotNull
-    @Size(min = 2, max = 30, message = "{error.size.name}")
+    @Size(min = 2, max = 30)
     @Column(name = "name", nullable = false) // Column name
     private String name;
 
@@ -30,6 +31,8 @@ public class AppUser {
     private String surname;
 
     @NotNull
+    @Email
+    @Column(unique = true)
     private String email;
 
     private String phoneNumber;
@@ -50,6 +53,16 @@ public class AppUser {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Pesel pesel;
+
+    public Long getPesel1() {
+        return pesel1;
+    }
+
+    public void setPesel1(Long pesel1) {
+        this.pesel1 = pesel1;
+    }
+
+    private Long pesel1;
 
     public Address getAddress() {
         return address;

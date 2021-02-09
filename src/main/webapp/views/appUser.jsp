@@ -105,6 +105,7 @@
                     <td>${appUser.phoneNumber}</td>
                     <td><a href="delete/${appUser.id}.html">delete</a></td>
                     <td><a href="appUsers.html?appUserId=${appUser.id}">edit</a></td>
+                    <td><a href="generatePdf-${appUser.id}">pdf</a></td>
                 </tr>
             </c:forEach>
         </table>
