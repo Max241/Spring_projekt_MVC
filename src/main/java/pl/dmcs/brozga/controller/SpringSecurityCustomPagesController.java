@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.dmcs.brozga.model.AppUser;
+import pl.dmcs.brozga.model.AppUserRole;
 import pl.dmcs.brozga.service.AppUserService;
 
 import javax.validation.Valid;
@@ -32,21 +33,6 @@ public class SpringSecurityCustomPagesController {
 
     }
 
-    @GetMapping("/register")
-    public ModelAndView register() {
-        return new ModelAndView("register", "register", new AppUser());
-    }
-
-    @PostMapping("/register")
-    public String registerPost(@Valid @ModelAttribute("register") AppUser user, BindingResult result) {
-/*        userValidator.validate(user, result);
-        System.out.println(result.getAllErrors());*/
-        if (result.getErrorCount() == 0) {
-            appUserService.addAppUser(user);
-            return "redirect:/";
-        }
-        return "register";
-    }
 
     @RequestMapping(value = "/accessDenied")
     public String accessDenied() {

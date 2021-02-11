@@ -11,31 +11,31 @@ import java.util.List;
 @Service("appUserRoleService")
 public class AppUserRoleServiceImpl implements AppUserRoleService {
 
-    private AppUserRoleRepo appUserRoleRepository;
+    private AppUserRoleRepo appUserRoleRepo;
 
     @Autowired
     public AppUserRoleServiceImpl(AppUserRoleRepo appUserRoleRepository) {
-        this.appUserRoleRepository = appUserRoleRepository;
+        this.appUserRoleRepo = appUserRoleRepository;
     }
 
     @Transactional
     public void addAppUserRole(AppUserRole appUserRole) {
-        appUserRoleRepository.save(appUserRole);
+        appUserRoleRepo.save(appUserRole);
     }
 
     @Transactional
     public List<AppUserRole> listAppUserRole() {
-        return appUserRoleRepository.findAll();
+        return appUserRoleRepo.findAll();
     }
 
     @Transactional
     public List<AppUserRole> getAllAppUserRoles() {
-        return appUserRoleRepository.findAll();
+        return appUserRoleRepo.findAll();
     }
 
     @Transactional
-    public AppUserRole getAppUserRole(long id) {
-        return appUserRoleRepository.getOne(id);
+    public AppUserRole getAppUserRole(Long id) {
+        return appUserRoleRepo.getOne(id);
     }
 
 }

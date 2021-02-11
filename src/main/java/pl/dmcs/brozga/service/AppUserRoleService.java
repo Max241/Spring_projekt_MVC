@@ -9,6 +9,7 @@ public interface AppUserRoleService {
 
     void addAppUserRole(AppUserRole appUserRole);
     List<AppUserRole> listAppUserRole();
-    AppUserRole getAppUserRole(long id);
+
+    AppUserRole getAppUserRole(Long id);
 
 }

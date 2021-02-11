@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.dmcs.brozga.model.AppUser;
+import pl.dmcs.brozga.model.AppUserEditData;
 import pl.dmcs.brozga.repository.AppUserRepo;
 import pl.dmcs.brozga.repository.AppUserRoleRepo;
 
@@ -24,20 +25,30 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Transactional
     public void addAppUser(AppUser appUser) {
-        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER"));
+        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
         appUser.setPassword(hashPassword(appUser.getPassword()));
         appUserRepo.save(appUser);
     }
 
-    @Transactional
+    @Override
     public void editAppUser(AppUser appUser) {
-        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER"));
+        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
         appUser.setPassword(hashPassword(appUser.getPassword()));
         appUserRepo.save(appUser);
     }
 
+    public void editAppUserDetails(AppUser appUser, AppUserEditData editedAppUser) {
+        appUser.setName(editedAppUser.getName());
+        appUser.setSurname(editedAppUser.getSurname());
+        appUser.setPhoneNumber(editedAppUser.getPhoneNumber());
+        appUser.setPesel(editedAppUser.getPesel());
+        appUserRepo.save(appUser);
+
+
+    }
+
     @Transactional
-    public AppUser getAppUserByEmail(String email) {
+    public AppUser findByEmail(String email) {
         return appUserRepo.findByEmail(email);
     }
 
@@ -59,6 +70,16 @@ public class AppUserServiceImpl implements AppUserService {
     private String hashPassword(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
+    }
+
+    @Transactional
+    public boolean existByEmail(String email) {
+        return appUserRepo.existsByEmail(email);
+    }
+
+    @Transactional
+    public boolean existByLogin(String login) {
+        return appUserRepo.existsByLogin(login);
     }
 
     @Transactional

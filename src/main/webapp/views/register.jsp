@@ -11,8 +11,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
@@ -34,7 +32,7 @@
             <form:errors path="surname"/>
         </div>
         <div class="form-label-group">
-            <form:input path="pesel1" type="number" size="11" maxlength="11" id="pesel1" name="pesel1"
+            <form:input path="pesel" type="number" size="11" maxlength="11" id="pesel" name="pesel"
                         class="form-control" placeholder="Pesel" required="" autofocus=""/>
             <form:label path="pesel" for="pesel"><spring:message code="register.pesel"/></form:label>
             <form:errors path="pesel"/>
@@ -50,6 +48,12 @@
                         required="" autofocus=""/>
             <form:label path="email" for="email"><spring:message code="register.email"/></form:label>
             <form:errors path="email"/>
+        </div>
+        <div class="form-label-group">
+            <form:input path="login" type="text" id="login" name="login" class="form-control" placeholder="Login"
+                        required="" autofocus=""/>
+            <form:label path="login" for="email"><spring:message code="register.login"/></form:label>
+            <form:errors path="login"/>
         </div>
         <div class="form-label-group">
             <form:input path="password" type="password" id="password" name="password" class="form-control"

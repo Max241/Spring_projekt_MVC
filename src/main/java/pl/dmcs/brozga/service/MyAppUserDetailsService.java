@@ -26,10 +26,10 @@ public class MyAppUserDetailsService implements UserDetailsService {
         this.appUserService = appUserService;
     }
 
-    @Transactional
+
     @Override
-    public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
-        pl.dmcs.brozga.model.AppUser appUser = appUserService.findByLogin(login);
+    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+        pl.dmcs.brozga.model.AppUser appUser = appUserService.findByEmail(email);
         List<GrantedAuthority> authorities = buildUserAuthority(appUser.getAppUserRole());
         return buildUserForAuthentication(appUser, authorities);
 
@@ -38,7 +38,7 @@ public class MyAppUserDetailsService implements UserDetailsService {
     // Converts AppUser user to org.springframework.security.core.userdetails.User
     private User buildUserForAuthentication(pl.dmcs.brozga.model.AppUser appUser, List<GrantedAuthority> authorities) {
 
-        return new User(appUser.getLogin(), appUser.getPassword(), appUser.isEnabled(),
+        return new User(appUser.getEmail(), appUser.getPassword(), appUser.isEnabled(),
                 true, true, true, authorities);
     }
 

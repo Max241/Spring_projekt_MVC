@@ -67,5 +67,10 @@
         <put-attribute name="body" value="/views/address.jsp"/>
     </definition>
 
+    <definition name="appUserEditProfile" extends="base.definition">
+        <put-attribute name="title" value="Edit Profile"/>
+        <put-attribute name="body" value="/views/appUserEditProfile.jsp"/>
+    </definition>
+
 
 </tiles-definitions>

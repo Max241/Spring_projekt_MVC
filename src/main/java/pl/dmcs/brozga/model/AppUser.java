@@ -22,7 +22,7 @@ public class AppUser {
 
 
     @NotNull
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 30, message = "{error.size.name}")
     @Column(name = "name", nullable = false) // Column name
     private String name;
 
@@ -45,42 +45,20 @@ public class AppUser {
     @JsonIgnore
     private String password;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<AppUserRole> appUserRole = new HashSet<AppUserRole>(0);
+    private Set<AppUserRole> appUserRole = new HashSet<>(0);
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Pesel pesel;
 
-    public Long getPesel1() {
-        return pesel1;
-    }
+    @NotNull
+    private Long pesel;
 
-    public void setPesel1(Long pesel1) {
-        this.pesel1 = pesel1;
-    }
-
-    private Long pesel1;
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    @ManyToOne
-    private Address address;
-
-    
-    public Pesel getPesel() {
+    public Long getPesel() {
         return pesel;
     }
 
-    public void setPesel(Pesel pesel) {
+    public void setPesel(Long pesel) {
         this.pesel = pesel;
     }
 

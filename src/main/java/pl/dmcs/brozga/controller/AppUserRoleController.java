@@ -31,6 +31,6 @@ public class AppUserRoleController {
     @RequestMapping(value = "/addAppUserRole", method = RequestMethod.POST)
     public String addUserRole(@ModelAttribute("appUserRole") AppUserRole appUserRole, BindingResult result) {
         appUserRoleService.addAppUserRole(appUserRole);
-        return "redirect:appUsers.html";
+        return "redirect:/";
     }
 }

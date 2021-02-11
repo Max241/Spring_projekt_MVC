@@ -16,11 +16,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
-import pl.dmcs.brozga.service.AddressService;
-import pl.dmcs.brozga.service.AppUserRoleService;
-import pl.dmcs.brozga.utils.AddressConverter;
-import pl.dmcs.brozga.utils.AppUserRoleConverter;
-import pl.dmcs.brozga.utils.AppUserRoleListConverter;
+
 
 import javax.annotation.Resource;
 import java.util.Locale;
@@ -98,21 +94,21 @@ public class SpringConfig implements WebMvcConfigurer {
         return bean;
     }
 
-    @Resource(name = "addressService")
-    private AddressService addressService;
+/*    @Resource(name = "addressService")
+    private AddressService addressService;*/
 
-    @Resource(name = "appUserRoleService")
-    private AppUserRoleService appUserRoleService;
+/*    @Resource(name = "appUserRoleService")
+    private AppUserRoleService appUserRoleService;*/
 
     @Override
     public void addFormatters(FormatterRegistry formatterRegistry) {
-        formatterRegistry.addConverter(getMyAddressConverter());
-        formatterRegistry.addConverter(getMyUserRoleConverter());
-        formatterRegistry.addConverter(getMyUserRoleListConverter());
+        // formatterRegistry.addConverter(getMyAddressConverter());
+        //formatterRegistry.addConverter(getMyUserRoleConverter());
+        //formatterRegistry.addConverter(getMyUserRoleListConverter());
     }
 
 
-    @Bean
+/*    @Bean
     public AddressConverter getMyAddressConverter() {
 
         return new AddressConverter(addressService);
@@ -126,7 +122,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public AppUserRoleListConverter getMyUserRoleListConverter() {
         return new AppUserRoleListConverter(appUserRoleService);
-    }
+    }*/
 
 }
 
