@@ -151,7 +151,16 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.13</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
         <!--Need with java 15 without it hibernate is not working
                 <dependency>
                     <groupId>javax.xml.bind</groupId>
