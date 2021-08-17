@@ -2,7 +2,6 @@ package pl.dmcs.brozga.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -18,7 +17,7 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private Long id;
 
 
     @NotNull
@@ -45,10 +44,15 @@ public class AppUser {
     @JsonIgnore
     private String password;
 
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AppUserRole> appUserRole = new HashSet<>(0);
+
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "activationtoken")
+    private ActivationToken activationToken;
 
 
     @NotNull
@@ -94,11 +98,11 @@ public class AppUser {
         this.phoneNumber = phoneNumber;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -132,6 +136,14 @@ public class AppUser {
 
     public void setAppUserRole(Set<AppUserRole> appUserRole) {
         this.appUserRole = appUserRole;
+    }
+
+    public ActivationToken getActivationToken() {
+        return activationToken;
+    }
+
+    public void setActivationToken(ActivationToken activationToken) {
+        this.activationToken = activationToken;
     }
 }
 

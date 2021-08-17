@@ -25,5 +25,7 @@ public interface AppUserRepo extends JpaRepository<AppUser, Long> {
 
     AppUser findByLogin(String login);
 
+    Optional<AppUser> findByActivationTokenToken(String token);
+
 
 }

@@ -34,5 +34,6 @@ public interface AppUserService {
     @Secured("ROLE_ADMIN")
     void removeAppUser(long id);
 
-
+    void activateUser(String token);
+    
 }

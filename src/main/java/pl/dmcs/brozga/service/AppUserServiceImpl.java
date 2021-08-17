@@ -7,11 +7,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.dmcs.brozga.model.AppUser;
 import pl.dmcs.brozga.model.AppUserEditData;
+import pl.dmcs.brozga.model.ActivationToken;
 import pl.dmcs.brozga.repository.AppUserRepo;
 import pl.dmcs.brozga.repository.AppUserRoleRepo;
+import pl.dmcs.brozga.repository.ActivationTokenRepo;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
@@ -20,27 +25,52 @@ public class AppUserServiceImpl implements AppUserService {
     private AppUserRoleRepo appUserRoleRepo;
     private EmailService emailService;
     private MessageSource messageSource;
+    private ActivationTokenRepo activationTokenRepo;
 
     @Autowired
-    public AppUserServiceImpl(AppUserRepo appUserRepo, AppUserRoleRepo appUserRoleRepo, EmailService emailService, MessageSource messageSource) {
+    public AppUserServiceImpl(AppUserRepo appUserRepo, AppUserRoleRepo appUserRoleRepo, EmailService emailService, MessageSource messageSource, ActivationTokenRepo activationTokenRepo) {
         this.appUserRoleRepo = appUserRoleRepo;
         this.appUserRepo = appUserRepo;
         this.emailService = emailService;
         this.messageSource = messageSource;
+        this.activationTokenRepo = activationTokenRepo;
     }
 
     @Override
     public void addAppUser(AppUser appUser) {
         appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
         appUser.setPassword(hashPassword(appUser.getPassword()));
+        ActivationToken activationToken = new ActivationToken();
+        activationToken.setToken(createActivationToken());
+        activationTokenRepo.save(activationToken);
+        appUser.setActivationToken(activationToken);
         appUserRepo.save(appUser);
         emailService.sendEmail(
                 appUser.getEmail(),
                 messageSource.getMessage("register.email.subject", null, LocaleContextHolder.getLocale()),
                 messageSource.getMessage("register.email.text", null, LocaleContextHolder.getLocale())
+                        + "\n" + "http://localhost:8080/activateAccount?token="
+                        + appUser.getActivationToken().getToken()
         );
 
     }
+
+/*    @Override
+    public AppUserToken getAppUserToken(String VerificationToken) {
+        return appUserTokenRepo.findByToken(VerificationToken);
+    }
+
+    @Override
+    public void createVerificationToken(AppUser appUser, String token) {
+        AppUserToken myToken = new AppUserToken(token, appUser);
+        appUserTokenRepo.save(myToken);
+    }
+
+    @Override
+    public AppUser getUser(String verificationToken) {
+        AppUser user = appUserTokenRepo.findByToken(verificationToken).getUser();
+        return user;
+    }*/
 
     @Override
     public void editAppUser(AppUser appUser) {
@@ -57,6 +87,26 @@ public class AppUserServiceImpl implements AppUserService {
         appUserRepo.save(appUser);
 
 
+    }
+
+    @Override
+    public void activateUser(String token) {
+        if (appUserRepo.findByActivationTokenToken(token).isPresent()) {
+            AppUser appUser = appUserRepo.findByActivationTokenToken(token).get();
+            //  AppUser appUser = getUserByActivationToken(token);
+            //AppUser appUser = appUserRepo.findByEmail("bartek130@gmail.com");
+            appUser.setEnabled(true);
+            appUserRepo.save(appUser);
+        }
+    }
+
+    private AppUser getUserByActivationToken(String token) {
+        Optional<AppUser> appUser = appUserRepo.findByActivationTokenToken(token);
+        return appUser.orElse(null);
+    }
+
+    private String createActivationToken() {
+        return UUID.randomUUID().toString();
     }
 
     @Transactional
