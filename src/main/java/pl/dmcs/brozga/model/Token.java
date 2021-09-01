@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
-public class ActivationToken {
+public class Token {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

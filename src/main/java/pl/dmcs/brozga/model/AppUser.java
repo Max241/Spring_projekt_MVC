@@ -51,8 +51,14 @@ public class AppUser {
 
     @OneToOne
     @JsonIgnore
-    @JoinColumn(name = "activationtoken")
-    private ActivationToken activationToken;
+    @JoinColumn(name = "token")
+    private Token token;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
+    private Set<Visit> visit = new HashSet<>(0);
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
+    private Set<VisitHours> visitHours = new HashSet<>(0);
 
 
     @NotNull
@@ -138,12 +144,28 @@ public class AppUser {
         this.appUserRole = appUserRole;
     }
 
-    public ActivationToken getActivationToken() {
-        return activationToken;
+    public Token getToken() {
+        return token;
     }
 
-    public void setActivationToken(ActivationToken activationToken) {
-        this.activationToken = activationToken;
+    public void setToken(Token token) {
+        this.token = token;
+    }
+
+    public Set<Visit> getVisit() {
+        return visit;
+    }
+
+    public void setVisit(Set<Visit> visit) {
+        this.visit = visit;
+    }
+
+    public Set<VisitHours> getVisitHours() {
+        return visitHours;
+    }
+
+    public void setVisitHours(Set<VisitHours> visitHours) {
+        this.visitHours = visitHours;
     }
 }
 

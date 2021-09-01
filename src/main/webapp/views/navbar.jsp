@@ -40,7 +40,9 @@
                     <div class="dropdown-menu" aria-labelledby="adminProfileDropdown">
                         <a class="dropdown-item" href="<c:url value="/appUsers"/>"><spring:message
                                 code="menu.adminPanel.EditUsers"/></a>
-
+                        <a class="dropdown-item" href="<c:url value="/visitHours/list/1"/>"><spring:message
+                                code="menu.visitsHours"/></a>
+                        <a class="dropdown-item" href="javascript:formSubmit()"><spring:message code="menu.logout"/></a>
                 <li class="nav-item">
                 </li>
             </sec:authorize>
@@ -50,7 +52,7 @@
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">${pageContext.request.userPrincipal.name}</a>
                     <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="<c:url value="/appUserEditProfile"/>"><spring:message
+                        <a class="dropdown-item" href="<c:url value="/appUsers"/>"><spring:message
                                 code="menu.editProfile"/></a>
                         <a class="dropdown-item" href="javascript:formSubmit()"><spring:message code="menu.logout"/></a>
                     </div>

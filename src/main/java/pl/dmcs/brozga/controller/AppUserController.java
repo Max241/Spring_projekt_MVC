@@ -10,7 +10,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.dmcs.brozga.model.AppUser;
-import pl.dmcs.brozga.model.AppUserEditData;
+import pl.dmcs.brozga.model.AppUserDTO;
 import pl.dmcs.brozga.service.AppUserRoleService;
 import pl.dmcs.brozga.service.AppUserService;
 import pl.dmcs.brozga.validator.AppUserEditDataValidator;
@@ -112,7 +112,7 @@ public class AppUserController {
     }
 
     @PostMapping("/appUserEditProfile")
-    public String editProfilePost(@Valid @ModelAttribute("appUserEditProfile") AppUserEditData editedAppUser, BindingResult result, Principal principal) {
+    public String editProfilePost(@Valid @ModelAttribute("appUserEditProfile") AppUserDTO editedAppUser, BindingResult result, Principal principal) {
         //appUserEditDataValidator.validate(editedAppUser, result);
         AppUser appUser = appUserService.findByEmail(principal.getName());
         if (result.getErrorCount() == 0) {

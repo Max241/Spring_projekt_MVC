@@ -3,7 +3,7 @@ package pl.dmcs.brozga.model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AppUserEditData {
+public class AppUserDTO {
 
     private String name;
     private String surname;

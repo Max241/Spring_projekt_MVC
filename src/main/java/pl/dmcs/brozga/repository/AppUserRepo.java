@@ -3,6 +3,7 @@ package pl.dmcs.brozga.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.dmcs.brozga.model.AppUser;
+import pl.dmcs.brozga.model.AppUserRole;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -25,7 +26,9 @@ public interface AppUserRepo extends JpaRepository<AppUser, Long> {
 
     AppUser findByLogin(String login);
 
-    Optional<AppUser> findByActivationTokenToken(String token);
+    Optional<AppUser> findByTokenToken(String token);
+
+    List<AppUser> findAllByAppUserRole(AppUserRole role);
 
 
 }

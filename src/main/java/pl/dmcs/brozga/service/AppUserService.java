@@ -3,7 +3,7 @@ package pl.dmcs.brozga.service;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import pl.dmcs.brozga.model.AppUser;
-import pl.dmcs.brozga.model.AppUserEditData;
+import pl.dmcs.brozga.model.AppUserDTO;
 
 import java.util.List;
 
@@ -29,11 +29,12 @@ public interface AppUserService {
     AppUser findByEmail(String email);
 
     //@PreAuthorize("hasRole('ROLE_ADMIN') OR (#appUser.email == principal.username)")
-    void editAppUserDetails(AppUser appUser, AppUserEditData editedAppUser);
+    void editAppUserDetails(AppUser appUser, AppUserDTO editedAppUser);
 
     @Secured("ROLE_ADMIN")
     void removeAppUser(long id);
 
     void activateUser(String token);
-    
+
+    List<AppUser> getDoctorsList();
 }
