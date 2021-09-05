@@ -107,4 +107,9 @@ public class VisitServiceImpl implements VisitService {
             visitRepo.save(visit);
         });
     }
+
+    @Override
+    public Visit getVisit(Long id) {
+        return visitRepo.findById(id).orElse(null);
+    }
 }

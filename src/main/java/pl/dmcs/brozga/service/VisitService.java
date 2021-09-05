@@ -26,4 +26,7 @@ public interface VisitService {
     void approveVisitForAdmin(Long visitId);
 
     void approveVisitForDoctor(Long visitId, Long doctorId);
+
+    Visit getVisit(Long id);
+
 }

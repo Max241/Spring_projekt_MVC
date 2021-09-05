@@ -35,7 +35,8 @@
                             <spring:message code="visit.cancelled"/>
                         </c:if>
                         <c:if test="${visit.approved}">
-                            <spring:message code="visit.approved"/>
+                            <a class="alert-link" href="<c:url value="/visits/bill/${visit.id}"/>"><spring:message
+                                    code="visit.approved"/></a>
                         </c:if>
                         <c:if test="${!visit.cancelled && !visit.approved}">
                             <c:if test="${ldtNow < visit.getVisitHours().getStartDate()}">

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.dmcs.brozga.model.AppUser;
 import pl.dmcs.brozga.model.Visit;
 import pl.dmcs.brozga.service.AppUserService;
+import pl.dmcs.brozga.service.PdfService;
 import pl.dmcs.brozga.service.VisitService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -16,20 +17,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/visits")
 public class VisitController {
-    private final AppUserService userService;
-    private final VisitService visitService;
+    private AppUserService userService;
+    private VisitService visitService;
+    private PdfService pdfService;
 
-    public VisitController(AppUserService userService, VisitService visitService) {
+    public VisitController(AppUserService userService, VisitService visitService, PdfService pdfService) {
         this.userService = userService;
         this.visitService = visitService;
+        this.pdfService = pdfService;
     }
-
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
     @GetMapping("/list/{id}")
@@ -62,7 +66,7 @@ public class VisitController {
 
     @PreAuthorize("hasRole('ROLE_PATIENT')")
     @GetMapping("/visits/{id}")
-    public String getMyVisits(Principal principal, @PathVariable Integer id, Model model) {
+    public String getMyVisits(@PathVariable Integer id, Principal principal, Model model) {
         Pageable pageable = new PageRequest(id - 1, 10);
         AppUser princ = userService.findByEmail(principal.getName());
         Page<Visit> visitPage = visitService.getVisitsPageForUser(princ.getId(), pageable);
@@ -104,5 +108,17 @@ public class VisitController {
             visitService.approveVisitForDoctor(id, princ.getId());
         }
         return "redirect:/visits/list/1";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_PATIENT')")
+    @GetMapping("/bill/{id}")
+    public void getBill(@PathVariable Long id, Principal principal, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser princ = userService.findByEmail(principal.getName());
+        Visit visit = visitService.getVisit(id);
+        if (visit != null && visit.isApproved() &&
+                (visit.getPatient().getId().equals(princ.getId()) || visit.getVisitHours().getDoctor().getId().equals(princ.getId()) || authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN")))) {
+            pdfService.generateBill(visit, response);
+        }
     }
 }

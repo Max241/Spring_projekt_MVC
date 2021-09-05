@@ -32,15 +32,12 @@ public class InsertDataToDB {
         roleService.addAppUserRole(patient);
 
         AppUserRole admin = new AppUserRole();
-        //AppUserRole patient = new AppUserRole();
         AppUserRole doctor = new AppUserRole();
 
         admin.setRole("ROLE_ADMIN");
-        // patient.setRole("ROLE_PATIENT");
         doctor.setRole("ROLE_DOCTOR");
 
         roleService.addAppUserRole(admin);
-        // roleService.addAppUserRole(patient);
         roleService.addAppUserRole(doctor);
 
         AppUser appUserPatient = new AppUser();
@@ -52,7 +49,6 @@ public class InsertDataToDB {
         appUserPatient.setLogin("pat");
         appUserPatient.setEnabled(true);
         appUserPatient.setPassword("pat");
-        // appUserPatient.getAppUserRole().add(patient);
         appUserService.addAppUser(appUserPatient);
 
         AppUser appUserPatient2 = new AppUser();
@@ -64,7 +60,6 @@ public class InsertDataToDB {
         appUserPatient2.setLogin("pat1");
         appUserPatient2.setEnabled(true);
         appUserPatient2.setPassword("pat1");
-        //  appUserPatient2.getAppUserRole().add(patient);
         appUserService.addAppUser(appUserPatient2);
 
 
@@ -92,6 +87,18 @@ public class InsertDataToDB {
         appUserDoctor1.setPassword("doc1");
         appUserDoctor1.getAppUserRole().add(doctor);
         appUserService.addAppUser(appUserDoctor1);
+
+        AppUser appUserAdmin = new AppUser();
+        appUserAdmin.setEmail("adm@op.pl");
+        appUserAdmin.setPesel(11111111113L);
+        appUserAdmin.setName("adm");
+        appUserAdmin.setSurname("good");
+        appUserAdmin.setPhoneNumber("55555555");
+        appUserAdmin.setLogin("adm");
+        appUserAdmin.setEnabled(true);
+        appUserAdmin.setPassword("adm");
+        appUserAdmin.getAppUserRole().add(admin);
+        appUserService.addAppUser(appUserAdmin);
 
     }
 }
