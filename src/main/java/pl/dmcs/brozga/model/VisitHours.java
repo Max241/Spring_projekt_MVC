@@ -4,6 +4,7 @@ package pl.dmcs.brozga.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -21,13 +22,13 @@ public class VisitHours {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endDate;
 
-    private Integer visitsCount;
-
     private Integer visitLength;
 
     private Double visitCost;
 
     private boolean cancelled;
+
+    private String description;
 
     @OneToMany(mappedBy = "visitHours")
     private Set<Visit> visits;
@@ -57,14 +58,6 @@ public class VisitHours {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
-    }
-
-    public Integer getVisitsCount() {
-        return visitsCount;
-    }
-
-    public void setVisitsCount(Integer visitsCount) {
-        this.visitsCount = visitsCount;
     }
 
     public Integer getVisitLength() {
@@ -105,6 +98,14 @@ public class VisitHours {
 
     public void setDoctor(AppUser doctor) {
         this.doctor = doctor;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

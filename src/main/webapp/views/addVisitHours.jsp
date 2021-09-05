@@ -36,19 +36,19 @@ To change this template use File | Settings | File Templates.--%>
                 <form:errors path="visitLength"/>
             </div>
             <div class="form-label-group">
-                <form:input path="visitsCount" type="number" min="1" id="visitsCount" name="visitsCount"
-                            class="form-control" placeholder="visitsCount" required=""
-                            autofocus=""/>
-                <form:label path="visitsCount" for="visitsCount"><spring:message
-                        code="visitHours.visitsCount"/></form:label>
-                <form:errors path="visitsCount"/>
-            </div>
-            <div class="form-label-group">
                 <form:input path="visitCost" type="number" min="1" id="visitCost" name="visitCost"
                             class="form-control" placeholder="visitCost" required=""
                             autofocus=""/>
                 <form:label path="visitCost" for="visitCost"><spring:message code="visitHours.visitCost"/></form:label>
                 <form:errors path="visitCost"/>
+            </div>
+            <div class="form-label-group">
+                <form:input path="description" type="text" id="description" name="description" class="form-control"
+                            placeholder="" required=""
+                            autofocus=""/>
+                <form:label path="description" for="description"><spring:message
+                        code="visitHours.description"/></form:label>
+                <form:errors path="description"/>
             </div>
             <sec:authorize access="hasAnyRole('ADMIN','DOCTOR')">
                 <div class="form-label-group">

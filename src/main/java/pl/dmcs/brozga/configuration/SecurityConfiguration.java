@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("ADMIN", "USER");
         auth.inMemoryAuthentication().withUser("ja").password("{noop}ja").roles("USER");
-        auth.inMemoryAuthentication().withUser("student").password("{noop}student").roles("STUDENT");
+        // auth.inMemoryAuthentication().withUser("student").password("{noop}student").roles("STUDENT");
         auth.inMemoryAuthentication().withUser("patient").password("{noop}patient").roles("PATIENT");
         auth.inMemoryAuthentication().withUser("doctor").password("{noop}doctor").roles("DOCTOR");
 
@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/exampleTwo*").access("hasRole('ROLE_STUDENT')")
                 .antMatchers("/address*").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/exampleThree*").permitAll()
-                .antMatchers("/visitHours*").access("hasRole('ROLE_ADMIN')or hasRole('ROLE_DOCTOR')")
+                .antMatchers("/visitHours*").access("hasRole('ROLE_ADMIN')or hasRole('ROLE_DOCTOR')or hasRole('ROLE_PATIENT')")
                 /*.and().formLogin().permitAll(); // with default login page*/
                 .and().formLogin().loginPage("/login").permitAll() // with custom login page
                 .usernameParameter("login").passwordParameter("password")

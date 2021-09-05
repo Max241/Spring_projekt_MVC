@@ -40,7 +40,8 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public void addAppUser(AppUser appUser) {
-        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
+        //appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
+        appUser.getAppUserRole().add(appUserRoleService.getAppUserRoleName("ROLE_PATIENT"));
         appUser.setPassword(hashPassword(appUser.getPassword()));
         Token token = new Token();
         token.setToken(createToken());
@@ -56,24 +57,7 @@ public class AppUserServiceImpl implements AppUserService {
        );*/
 
     }
-
-/*    @Override
-    public AppUserToken getAppUserToken(String VerificationToken) {
-        return appUserTokenRepo.findByToken(VerificationToken);
-    }
-
-    @Override
-    public void createVerificationToken(AppUser appUser, String token) {
-        AppUserToken myToken = new AppUserToken(token, appUser);
-        appUserTokenRepo.save(myToken);
-    }
-
-    @Override
-    public AppUser getUser(String verificationToken) {
-        AppUser user = appUserTokenRepo.findByToken(verificationToken).getUser();
-        return user;
-    }*/
-
+    
     @Override
     public void editAppUser(AppUser appUser) {
         appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));

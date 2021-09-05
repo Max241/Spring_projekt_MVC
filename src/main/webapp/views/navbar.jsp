@@ -42,34 +42,50 @@
                                 code="menu.adminPanel.EditUsers"/></a>
                         <a class="dropdown-item" href="<c:url value="/visitHours/list/1"/>"><spring:message
                                 code="menu.visitsHours"/></a>
+                        <a class="dropdown-item" href="<c:url value="/visits/list/1"/>"><spring:message
+                                code="menu.visits"/></a>
                         <a class="dropdown-item" href="javascript:formSubmit()"><spring:message code="menu.logout"/></a>
                 <li class="nav-item">
                 </li>
             </sec:authorize>
-            <c:if test="${pageContext.request.userPrincipal.name != null}">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-uppercase" href="#" id="profileDropdown"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">${pageContext.request.userPrincipal.name}</a>
-                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="<c:url value="/appUsers"/>"><spring:message
-                                code="menu.editProfile"/></a>
-                        <a class="dropdown-item" href="javascript:formSubmit()"><spring:message code="menu.logout"/></a>
-                    </div>
-                </li>
-            </c:if>
-    </ul>
-    <form class="form-inline mt-2 mt-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false"><spring:message code="menu.language"/></a>
-            <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                <a class="dropdown-item" href="?lang=pl">PL</a>
-                <a class="dropdown-item" href="?lang=eng">EN</a>
-                <a class="dropdown-item" href="?lang=fr">FR</a>
-            </div>
-        </li>
-    </form>
+            <sec:authorize access="!hasRole('ROLE_ADMIN')">
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="profileDropdown"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">${pageContext.request.userPrincipal.name}</a>
+                        <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="<c:url value="/appUsers"/>"><spring:message
+                                    code="menu.editProfile"/></a>
+                            <sec:authorize access="!hasRole('ROLE_DOCTOR')">
+                                <a class="dropdown-item" href="<c:url value="/visitHours"/>"><spring:message
+                                        code="menu.visitsHours"/></a>
+                            </sec:authorize>
+                            <sec:authorize access="hasRole('ROLE_DOCTOR')">
+                                <a class="dropdown-item" href="<c:url value="/visitHours/add"/>"><spring:message
+                                        code="menu.visitsHours"/></a>
+                                <a class="dropdown-item" href="<c:url value="/visits/list/1"/>"><spring:message
+                                        code="menu.visits"/></a>
+                            </sec:authorize>
+                            <a class="dropdown-item" href="<c:url value="/visits/visits/1"/>">My visits</a>
+                            <a class="dropdown-item" href="javascript:formSubmit()"><spring:message
+                                    code="menu.logout"/></a>
+                        </div>
+                    </li>
+                </c:if>
+            </sec:authorize>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><spring:message code="menu.language"/></a>
+                <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <a class="dropdown-item" href="?lang=pl">PL</a>
+                    <a class="dropdown-item" href="?lang=eng">EN</a>
+                    <a class="dropdown-item" href="?lang=fr">FR</a>
+                </div>
+            </li>
+        </form>
     </div>
 </nav>
 <script>

@@ -64,4 +64,3 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="register.title"/></button>
     </form:form>
 </div>
-

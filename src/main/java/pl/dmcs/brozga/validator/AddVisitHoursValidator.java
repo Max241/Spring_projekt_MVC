@@ -19,18 +19,15 @@ public class AddVisitHoursValidator implements Validator {
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "startDate", "error.field.required");
         ValidationUtils.rejectIfEmpty(errors, "visitLength", "error.field.required");
-        ValidationUtils.rejectIfEmpty(errors, "visitsCount", "error.field.required");
         ValidationUtils.rejectIfEmpty(errors, "visitCost", "error.field.required");
         ValidationUtils.rejectIfEmpty(errors, "doctorId", "error.field.required");
+        ValidationUtils.rejectIfEmpty(errors, "description", "error.field.required");
 
         if (errors.getErrorCount() == 0) {
             if (((VisitHoursDTO) o).getStartDate().isBefore(LocalDateTime.now())) {
                 errors.rejectValue("startDate", "visitHours.error.startDate");
             }
 
-            if (((VisitHoursDTO) o).getVisitsCount() < 1) {
-                errors.rejectValue("visitsCount", "visitHours.error.visitsCount");
-            }
 
             if (((VisitHoursDTO) o).getVisitCost() < 0) {
                 errors.rejectValue("visitCost", "visitHours.error.visitCost");

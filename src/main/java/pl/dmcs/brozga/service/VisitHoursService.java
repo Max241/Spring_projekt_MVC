@@ -6,6 +6,7 @@ import pl.dmcs.brozga.model.VisitHoursDTO;
 import pl.dmcs.brozga.model.VisitHours;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface VisitHoursService {
 
@@ -20,4 +21,8 @@ public interface VisitHoursService {
     Page<VisitHours> getVisitHoursNotCancelledForAdmin(Pageable pageable);
 
     Page<VisitHours> getVisitHoursNotCancelledForDoctor(Long doctorId, Pageable pageable);
+
+    VisitHours getSingleVisitHours(Long id);
+
+    List<VisitHours> getVisitHoursNotCancelledByDoctor(Long doctorId);
 }
