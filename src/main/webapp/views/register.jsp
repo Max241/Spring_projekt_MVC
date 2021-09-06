@@ -61,6 +61,7 @@
             <form:label path="password" for="password"><spring:message code="register.password"/></form:label>
             <form:errors path="password"/>
         </div>
+        <div class="g-recaptcha" data-sitekey="6Lc7REwcAAAAAPhGUcU5Gyxur64RiTxLNNa3UK5Q"></div>
         <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="register.title"/></button>
     </form:form>
 </div>

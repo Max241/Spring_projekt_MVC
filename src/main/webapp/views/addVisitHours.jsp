@@ -37,7 +37,7 @@ To change this template use File | Settings | File Templates.--%>
             </div>
             <div class="form-label-group">
                 <form:input path="visitCost" type="number" min="1" id="visitCost" name="visitCost"
-                            class="form-control" placeholder="visitCost" required=""
+                            class="form-control" placeholder="" required=""
                             autofocus=""/>
                 <form:label path="visitCost" for="visitCost"><spring:message code="visitHours.visitCost"/></form:label>
                 <form:errors path="visitCost"/>

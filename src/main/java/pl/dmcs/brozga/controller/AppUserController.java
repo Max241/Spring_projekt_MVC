@@ -13,6 +13,7 @@ import pl.dmcs.brozga.model.AppUser;
 import pl.dmcs.brozga.model.AppUserDTO;
 import pl.dmcs.brozga.service.AppUserRoleService;
 import pl.dmcs.brozga.service.AppUserService;
+import pl.dmcs.brozga.service.ReCaptchaService;
 import pl.dmcs.brozga.validator.AppUserEditDataValidator;
 import pl.dmcs.brozga.validator.AppUserValidator;
 
@@ -27,11 +28,13 @@ public class AppUserController {
     private AppUserRoleService appUserRoleService;
     private AppUserValidator appUserValidator;
     private AppUserEditDataValidator appUserEditDataValidator;
+    private ReCaptchaService reCaptchaService;
 
     @Autowired
-    public AppUserController(AppUserService appUserService, AppUserRoleService appUserRoleService) {
+    public AppUserController(AppUserService appUserService, AppUserRoleService appUserRoleService, ReCaptchaService reCaptchaService) {
         this.appUserService = appUserService;
         this.appUserRoleService = appUserRoleService;
+        this.reCaptchaService = reCaptchaService;
         this.appUserValidator = new AppUserValidator(appUserService);
     }
 
@@ -92,10 +95,10 @@ public class AppUserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerPost(@Valid @ModelAttribute("register") AppUser appUser, BindingResult result) {
+    public String registerPost(@Valid @ModelAttribute("register") AppUser appUser, BindingResult result, HttpServletRequest request) {
         appUserValidator.validate(appUser, result);
         System.out.println(result.getAllErrors());
-        if (result.getErrorCount() == 0) {
+        if (result.getErrorCount() == 0 && reCaptchaService.verify(request.getParameter("g-recaptcha-response"))) {
             appUserService.addAppUser(appUser);
             return "redirect:/";
         }

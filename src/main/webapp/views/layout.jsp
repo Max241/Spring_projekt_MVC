@@ -26,6 +26,7 @@
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
             crossorigin="anonymous"></script>
     <script src="<c:url value="/resources/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"/>"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
 <tiles:insertAttribute name="navbar"/>
