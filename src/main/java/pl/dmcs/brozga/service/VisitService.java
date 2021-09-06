@@ -27,6 +27,8 @@ public interface VisitService {
 
     void approveVisitForDoctor(Long visitId, Long doctorId);
 
+    void approveVisitsAuto();
+
     Visit getVisit(Long id);
 
 }

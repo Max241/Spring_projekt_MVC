@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import pl.dmcs.brozga.model.Visit;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -24,7 +25,9 @@ public interface VisitRepo extends JpaRepository<Visit, Long> {
     Page<Visit> findAllByVisitHoursDoctorIdOrderByVisitHoursStartDate(Long doctorId, Pageable pageable);
 
     Page<Visit> findAllByPatientIdOrderByVisitHoursStartDate(Long patientId, Pageable pageable);
-    
+
+    List<Visit> findAllByApprovedIsFalseAndCancelledIsFalse();
+
     boolean existsByCancelledIsFalseAndVisitHoursId(Long visitHoursId);
 
     boolean existsByCancelledIsFalseAndVisitHoursIdAndPatientId(Long visitHoursId, Long patientId);

@@ -10,6 +10,7 @@ import pl.dmcs.brozga.repository.VisitRepo;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -112,4 +113,14 @@ public class VisitServiceImpl implements VisitService {
     public Visit getVisit(Long id) {
         return visitRepo.findById(id).orElse(null);
     }
+    
+    @Override
+    public void approveVisitsAuto() {
+        List<Visit> visits = visitRepo.findAllByApprovedIsFalseAndCancelledIsFalse();
+        visits.forEach(visit -> {
+            visit.setApproved(true);
+            visitRepo.save(visit);
+        });
+    }
+
 }
