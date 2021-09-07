@@ -3,10 +3,13 @@ package pl.dmcs.brozga.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.dmcs.brozga.model.AppUser;
 import pl.dmcs.brozga.model.AppUserDTO;
+import pl.dmcs.brozga.model.AppUserRole;
 import pl.dmcs.brozga.model.Token;
 import pl.dmcs.brozga.repository.AppUserRepo;
 import pl.dmcs.brozga.repository.AppUserRoleRepo;
@@ -14,9 +17,7 @@ import pl.dmcs.brozga.repository.TokenRepo;
 
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
@@ -41,31 +42,32 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public void addAppUser(AppUser appUser) {
         //appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
-        appUser.getAppUserRole().add(appUserRoleService.getAppUserRoleName("ROLE_PATIENT"));
+        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_PATIENT").orElse(null));
         appUser.setPassword(hashPassword(appUser.getPassword()));
         Token token = new Token();
         token.setToken(createToken());
         tokenRepo.save(token);
         appUser.setToken(token);
         appUserRepo.save(appUser);
-/*     emailService.sendEmail(
-               appUser.getEmail(),
-               messageSource.getMessage("register.email.subject", null, LocaleContextHolder.getLocale()),
-               messageSource.getMessage("register.email.text", null, LocaleContextHolder.getLocale())
+        emailService.sendEmail(
+                appUser.getEmail(),
+                messageSource.getMessage("register.subject", null, LocaleContextHolder.getLocale()),
+                messageSource.getMessage("register.text", null, LocaleContextHolder.getLocale())
                         + "\n" + "http://localhost:8080/activateAccount?token="
-                       + appUser.getToken().getToken()
-       );*/
+                        + appUser.getToken().getToken()
+        );
 
     }
-    
+
     @Override
     public void editAppUser(AppUser appUser) {
-        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_USER").orElse(null));
+        appUser.getAppUserRole().add(appUserRoleRepo.findByRole("ROLE_PATIENT").orElse(null));
         appUser.setPassword(hashPassword(appUser.getPassword()));
         appUserRepo.save(appUser);
     }
 
-    public void editAppUserDetails(AppUser appUser, AppUserDTO editedAppUser) {
+
+    public void editAppUserDetails(AppUserDTO editedAppUser, AppUser appUser) {
         appUser.setName(editedAppUser.getName());
         appUser.setSurname(editedAppUser.getSurname());
         appUser.setPhoneNumber(editedAppUser.getPhoneNumber());
@@ -76,14 +78,26 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public Page<AppUser> getUsersWhereIdIsNot(Long id, Pageable pageable) {
+        return appUserRepo.findAllByIdIsNot(id, pageable);
+    }
+
+
+    @Override
     public void activateUser(String token) {
         if (appUserRepo.findByTokenToken(token).isPresent()) {
             AppUser appUser = appUserRepo.findByTokenToken(token).get();
-            //AppUser appUser = getUserByActivationToken(token);
-            //AppUser appUser = appUserRepo.findByEmail("bartek130@gmail.com");
             appUser.setEnabled(true);
             appUserRepo.save(appUser);
         }
+    }
+
+    public void editUserForAdmin(AppUserDTO appUserDTO, AppUser appUser) {
+        appUser.setName(appUserDTO.getName());
+        appUser.setSurname(appUserDTO.getSurname());
+        appUser.setPhoneNumber(appUserDTO.getPhoneNumber());
+        appUser.setPesel(appUserDTO.getPesel());
+        appUserRepo.save(appUser);
     }
 
     private AppUser getUserByActivationToken(String token) {

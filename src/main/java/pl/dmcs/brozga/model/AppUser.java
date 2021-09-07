@@ -46,17 +46,19 @@ public class AppUser {
 
     private boolean enabled = false;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AppUserRole> appUserRole = new HashSet<>(0);
 
     @OneToOne
     @JsonIgnore
-    @JoinColumn(name = "token")
     private Token token;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
     private Set<Visit> visit = new HashSet<>(0);
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
     private Set<VisitHours> visitHours = new HashSet<>(0);
 

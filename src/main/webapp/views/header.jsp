@@ -33,11 +33,10 @@
 				 alt="First slide">
 			<div class="container">
 				<div class="carousel-caption d-none d-md-block text-left">
-					<h1>Example headline. Server time</h1>
+					<h1>MediCover</h1>
 					<p>${serverTime}</p>
-					<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-						at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+					<p><spring:message code="label.descryption"/></p>
+					<p><a class="btn btn-lg btn-primary" href="/register" role="button">Sign up today</a></p>
 				</div>
 			</div>
 		</div>
@@ -47,11 +46,10 @@
 				 alt="Second slide">
 			<div class="container">
 				<div class="carousel-caption d-none d-md-block">
-					<h1>Another example headline. Message</h1>
+					<h1>MediCover</h1>
 					<p>${message}</p>
-					<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-						at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+					<p><spring:message code="label.descryption1"/></p><a class="btn btn-lg btn-primary" href="/login"
+																		 role="button">Login</a></p>
 				</div>
 			</div>
 		</div>
@@ -61,9 +59,8 @@
 				 alt="Third slide">
 			<div class="container">
 				<div class="carousel-caption d-none d-md-block text-right">
-					<h1>One more for good measure.</h1>
-					<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-						at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+					<h1>Covid-19</h1>
+					<p><spring:message code="label.descryption2"/></p>
 					<p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
 				</div>
 			</div>

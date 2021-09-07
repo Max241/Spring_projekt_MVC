@@ -38,7 +38,7 @@
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Admin Panel</a>
                     <div class="dropdown-menu" aria-labelledby="adminProfileDropdown">
-                        <a class="dropdown-item" href="<c:url value="/appUsers"/>"><spring:message
+                        <a class="dropdown-item" href="<c:url value="/appUsers/list/1"/>"><spring:message
                                 code="menu.adminPanel.EditUsers"/></a>
                         <a class="dropdown-item" href="<c:url value="/visitHours/list/1"/>"><spring:message
                                 code="menu.visitsHours"/></a>
@@ -55,19 +55,25 @@
                            data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">${pageContext.request.userPrincipal.name}</a>
                         <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="<c:url value="/appUsers"/>"><spring:message
-                                    code="menu.editProfile"/></a>
+                            <a class="dropdown-item" href="<c:url value="/appUsers/list/1"/>"><spring:message
+                                    code="menu.editProfile1"/></a>
                             <sec:authorize access="!hasRole('ROLE_DOCTOR')">
                                 <a class="dropdown-item" href="<c:url value="/visitHours"/>"><spring:message
                                         code="menu.visitsHours"/></a>
+                                <a class="dropdown-item" href="<c:url value="/visits/visits/1"/>"><spring:message
+                                        code="menu.bookedVisits"/></a>
+                                <a class="dropdown-item" href="<c:url value="/appUserEditProfile"/>"><spring:message
+                                        code="menu.editProfile"/></a>
+
                             </sec:authorize>
                             <sec:authorize access="hasRole('ROLE_DOCTOR')">
                                 <a class="dropdown-item" href="<c:url value="/visitHours/add"/>"><spring:message
+                                        code="menu.visitsHoursAdd"/></a>
+                                <a class="dropdown-item" href="<c:url value="/visitHours/list/1"/>"><spring:message
                                         code="menu.visitsHours"/></a>
                                 <a class="dropdown-item" href="<c:url value="/visits/list/1"/>"><spring:message
                                         code="menu.visits"/></a>
                             </sec:authorize>
-                            <a class="dropdown-item" href="<c:url value="/visits/visits/1"/>">My visits</a>
                             <a class="dropdown-item" href="javascript:formSubmit()"><spring:message
                                     code="menu.logout"/></a>
                         </div>

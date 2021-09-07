@@ -1,26 +1,31 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: db2admin
-  Date: 2021-02-10
-  Time: 23:04
-  To change this template use File | Settings | File Templates.
+<%--Created by IntelliJ IDEA.
+User: db2admin
+Date: 2021-09-04
+Time: 16;30
+To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
-    <form:form class="form-signin" name='appUserEditProfile' method="POST" action="/appUserEditProfile"
-               modelAttribute="appUserEditProfile">
-        <div class="text-center col-mb-6">
-            <h1 class="h3"><spring:message code="editProfile.title"/></h1>
-        </div>
+    <form:form class="form-signin" name='editappUser' method="POST" action="/appUsers/get/${editUser.id}"
+               modelAttribute="editUser">
+        <c:if test="${not empty success}">
+            <div class="alert alert-primary container col-8 text-center" role="alert">
+                <spring:message code="${success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty deleted}">
+            <div class="alert alert-danger container col-8 text-center" role="alert">
+                <spring:message code="${deleted}"/>
+            </div>
+        </c:if>
+
 
         <div class="form-label-group">
-            <form:input path="name" type="text" id="name" name="name" class="form-control"
-                        placeholder="name" required=""
+            <form:input path="name" type="text" id="name" name="name" class="form-control" placeholder="name"
+                        required=""
                         autofocus=""/>
             <form:label path="name" for="name"><spring:message code="editProfile.name"/></form:label>
             <form:errors path="name"/>
@@ -33,7 +38,7 @@
             <form:errors path="surname"/>
         </div>
         <div class="form-label-group">
-            <form:input path="pesel" type="number" size="11" maxlength="11"
+            <form:input path="pesel" type="number" min="10000000000" max="99999999999" size="11" maxlength="11"
                         id="pesel" name="pesel" class="form-control" placeholder="Pesel" required=""
                         autofocus=""/>
             <form:label path="pesel" for="pesel"><spring:message code="editProfile.pesel"/></form:label>
@@ -43,10 +48,16 @@
             <form:input path="phoneNumber" type="text" id="phoneNumber" name="phoneNumber" class="form-control"
                         placeholder="phoneNumber" required=""
                         autofocus=""/>
-            <form:label path="phoneNumber" for="phoneNumber"><spring:message code="editProfile.telephone"/></form:label>
+            <form:label path="phoneNumber" for="phoneNumber"><spring:message
+                    code="editProfile.telephone"/></form:label>
             <form:errors path="phoneNumber"/>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message
                 code="editProfile.title"/></button>
     </form:form>
+    <form:form class="form-signin" name='deleteUser' method="POST" action="/users/delete/${editUser.id}">
+        <button class="btn btn-lg btn-danger btn-block" type="submit"><spring:message
+                code="editProfile.title"/></button>
+    </form:form>
+
 </div>

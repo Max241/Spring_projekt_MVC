@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 import pl.dmcs.brozga.model.AppUserDTO;
 
 
-public class AppUserEditDataValidator implements Validator {
+public class AppUserDTOValidator implements Validator {
 
     @Override
     public boolean supports(Class clazz) {

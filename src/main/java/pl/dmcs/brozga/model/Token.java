@@ -20,8 +20,7 @@ public class Token {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime created = LocalDateTime.now();
 
-    @OneToOne//(targetEntity = AppUser.class, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "appuser_id")
+    @OneToOne
     private AppUser appUser;
 
     public Long getId() {

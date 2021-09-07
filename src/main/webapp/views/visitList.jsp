@@ -56,28 +56,5 @@
             </c:forEach>
             </tbody>
         </table>
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item <c:if test="${currentPage <= 1}">disabled</c:if>">
-                    <c:if test="${currentPage > 1}">
-                        <a class="page-link" href="/visits/list/${id - 1}"><spring:message
-                                code="page.before"/></a>
-                    </c:if>
-                    <c:if test="${currentPage <= 1}">
-                        <a class="page-link" href="/visits/list/1"><spring:message code="page.before"/></a>
-                    </c:if>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">${currentPage}</a></li>
-                <li class="page-item <c:if test="${totalPages <= currentPage}">disabled</c:if>">
-                    <c:if test="${totalPages > currentPage}">
-                        <a class="page-link" href="/visits/list/${id + 1}"><spring:message code="page.next"/></a>
-                    </c:if>
-                    <c:if test="${totalPages <= currentPage}">
-                        <a class="page-link" href="/visits/list/${currentPage}"><spring:message
-                                code="page.next"/></a>
-                    </c:if>
-                </li>
-            </ul>
-        </nav>
     </section>
 </main>

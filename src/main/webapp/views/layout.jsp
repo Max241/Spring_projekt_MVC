@@ -34,7 +34,6 @@
     <tiles:insertAttribute name="header"/>
     <div class="row">
         <div class="col-12">
-            <tiles:insertAttribute name="menu"/>
             <tiles:insertAttribute name="body"/>
         </div>
     </div>

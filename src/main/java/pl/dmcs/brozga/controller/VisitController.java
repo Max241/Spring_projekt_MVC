@@ -71,8 +71,6 @@ public class VisitController {
         AppUser princ = userService.findByEmail(principal.getName());
         Page<Visit> visitPage = visitService.getVisitsPageForUser(princ.getId(), pageable);
         model.addAttribute("visitList", visitPage.getContent());
-        model.addAttribute("totalPages", visitPage.getTotalPages());
-        model.addAttribute("currentPage", id);
         model.addAttribute("ldtNow", LocalDateTime.now());
         return "visits";
     }

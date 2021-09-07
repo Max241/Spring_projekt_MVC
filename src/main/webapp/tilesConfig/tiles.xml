@@ -102,5 +102,14 @@
         <put-attribute name="body" value="/views/visitList.jsp"/>
     </definition>
 
+    <definition name="userList" extends="base.definition">
+        <put-attribute name="title" value="User List"/>
+        <put-attribute name="body" value="/views/userList.jsp"/>
+    </definition>
+    <definition name="editUser" extends="base.definition">
+        <put-attribute name="title" value="Edit User"/>
+        <put-attribute name="body" value="/views/editUser.jsp"/>
+    </definition>
+
 
 </tiles-definitions>

@@ -32,22 +32,6 @@
 
 
 <br/>
-<%--<script>
-    function formSubmit() {
-        document.getElementById("logoutForm").submit();
-    }
-</script>
-<!-- csrf for log out-->
-<form action="/logout" method="post" id="logoutForm">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>--%>
+
 
 <br/>
-<%--<div>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <p>
-            <spring:message code="label.welcome"/> : ${pageContext.request.userPrincipal.name} |
-            <a href="javascript:formSubmit()"> Logout</a>
-        </p>
-    </c:if>
-</div>--%>

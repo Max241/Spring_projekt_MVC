@@ -22,13 +22,13 @@
         <div class="form-label-group ">
             <form:input path="name" type="text" id="name" name="name" class="form-control" placeholder="name"
                         required="" autofocus=""/>
-            <form:label path="name" for="name"><spring:message code="register.firstName"/></form:label>
+            <form:label path="name" for="name"><spring:message code="register.name"/></form:label>
             <form:errors path="name"/>
         </div>
         <div class="form-label-group">
             <form:input path="surname" type="text" id="surname" name="surname" class="form-control"
                         placeholder="surname" required="" autofocus=""/>
-            <form:label path="surname" for="surname"><spring:message code="register.lastName"/></form:label>
+            <form:label path="surname" for="surname"><spring:message code="register.surname"/></form:label>
             <form:errors path="surname"/>
         </div>
         <div class="form-label-group">

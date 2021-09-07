@@ -1,6 +1,5 @@
 package pl.dmcs.brozga.utils;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import pl.dmcs.brozga.model.AppUser;
 import pl.dmcs.brozga.model.AppUserRole;
@@ -41,9 +40,9 @@ public class InsertDataToDB {
         roleService.addAppUserRole(doctor);
 
         AppUser appUserPatient = new AppUser();
-        appUserPatient.setEmail("pat@op.pl");
+        appUserPatient.setEmail("patient@op.pl");
         appUserPatient.setPesel(11111111112L);
-        appUserPatient.setName("pat");
+        appUserPatient.setName("patient");
         appUserPatient.setSurname("good");
         appUserPatient.setPhoneNumber("55555555");
         appUserPatient.setLogin("pat");
@@ -52,9 +51,9 @@ public class InsertDataToDB {
         appUserService.addAppUser(appUserPatient);
 
         AppUser appUserPatient2 = new AppUser();
-        appUserPatient2.setEmail("pat1@op.pl");
+        appUserPatient2.setEmail("patient1@op.pl");
         appUserPatient2.setPesel(11111111113L);
-        appUserPatient2.setName("pat1");
+        appUserPatient2.setName("patient1");
         appUserPatient2.setSurname("good1");
         appUserPatient2.setPhoneNumber("55555555");
         appUserPatient2.setLogin("pat1");
@@ -64,9 +63,9 @@ public class InsertDataToDB {
 
 
         AppUser appUserDoctor = new AppUser();
-        appUserDoctor.setEmail("doc@op.pl");
+        appUserDoctor.setEmail("doctor@op.pl");
         appUserDoctor.setPesel(11111111111L);
-        appUserDoctor.setName("doc");
+        appUserDoctor.setName("doctor");
         appUserDoctor.setSurname("good");
         appUserDoctor.setPhoneNumber("55555555");
         appUserDoctor.setLogin("doc");
@@ -76,7 +75,7 @@ public class InsertDataToDB {
         appUserService.addAppUser(appUserDoctor);
 
 
-        AppUser appUserDoctor1 = new AppUser();
+/*        AppUser appUserDoctor1 = new AppUser();
         appUserDoctor1.setEmail("doc1@op.pl");
         appUserDoctor1.setPesel(11111111111L);
         appUserDoctor1.setName("doc1");
@@ -86,13 +85,13 @@ public class InsertDataToDB {
         appUserDoctor1.setEnabled(true);
         appUserDoctor1.setPassword("doc1");
         appUserDoctor1.getAppUserRole().add(doctor);
-        appUserService.addAppUser(appUserDoctor1);
+        appUserService.addAppUser(appUserDoctor1);*/
 
         AppUser appUserAdmin = new AppUser();
-        appUserAdmin.setEmail("adm@op.pl");
+        appUserAdmin.setEmail("admin@op.pl");
         appUserAdmin.setPesel(11111111113L);
-        appUserAdmin.setName("adm");
-        appUserAdmin.setSurname("good");
+        appUserAdmin.setName("admin");
+        appUserAdmin.setSurname("admin");
         appUserAdmin.setPhoneNumber("55555555");
         appUserAdmin.setLogin("adm");
         appUserAdmin.setEnabled(true);

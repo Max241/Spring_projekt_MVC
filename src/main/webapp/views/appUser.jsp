@@ -9,7 +9,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%--<html>
 
 <body>
 <h1><spring:message code="label.appUser"/></h1>
@@ -60,22 +60,6 @@
             <td><form:input path="pesel"/></td>
             <td><form:errors path="pesel"/></td>
         </tr>
-            <%--        <tr>
-                        <td><form:label path="address"><spring:message code="label.address"/></form:label></td>
-                        <td><form:select path="address">
-                            <c:forEach items="${addressesList}" var="address">
-                                <option value="${address.id}" ${address.id == selectedAddress ? 'selected="selected"' : ''}>${address.street}</option>
-                            </c:forEach>
-                        </form:select></td>
-                        <td><form:errors path="address"/></td>
-                    </tr>--%>
-            <%--        <tr>
-                        <td><form:label path="appUserRole"><spring:message code="label.role"/></form:label></td>
-                        <td><form:select path="appUserRole" multiple="true">
-                            <form:options items="${appUserRoleList}" itemValue="id" itemLabel="role"/>
-                        </form:select></td>
-                        <td><form:errors path="appUserRole"/></td>
-                    </tr>--%>
         <tr>
             <td colspan="2">
                 <c:if test="${appUser.id==0}">
@@ -113,4 +97,158 @@
 
 </form:form>
 </body>
-</html>
+</html>--%>
+
+<main role="main">
+    <section class="container">
+        <c:if test="${not empty errorDate}">
+            <div class="alert alert-primary container col-5 text-center" role="alert">
+                <spring:message code="${errorDate}"/>
+            </div>
+        </c:if>
+        <c:if test="${!empty appUserList}">
+            <table class="table table-hover-rounded text-center">
+                <thead class="thead-dark">
+                <tr>
+                    <th><spring:message code="label.name"/></th>
+                    <th><spring:message code="label.surname"/></th>
+                    <th><spring:message code="label.email"/></th>
+                    <th><spring:message code="label.phoneNumber"/></th>
+                    <th><spring:message code="label.manage"/></th>
+                </tr>
+                </thead>
+                <c:forEach items="${appUserList}" var="appUser">
+                    <tr>
+                        <td>${appUser.name} </td>
+                        <td>${appUser.surname} </td>
+                        <td>${appUser.email}</td>
+                        <td>${appUser.phoneNumber}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="">
+                                <form:form class="form-signin" name='deleteUser' method="POST"
+                                           action="/delete/${appUser.id}">
+                                    <button class="btn btn-lg btn-danger" type="submit"><spring:message
+                                            code="label.delete"/></button>
+                                </form:form>
+                                <form:form class="form-signin" name='editUser' method="POST"
+                                           action=" /AppUser/get/${user.id}">
+                                    <button class="btn btn-lg btn-success" type="submit"><spring:message
+                                            code="label.edit"/></button>
+                                </form:form>
+                                <form:form class="form-signin" name='generatePdf' method="GET"
+                                           action="/generatePdf-${appUser.id}">
+                                    <button class="btn btn-lg btn-info" type="submit"><spring:message
+                                            code="label.pdf"/></button>
+                                </form:form>
+
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
+        <%--<div class="container">&lt;%&ndash;
+                    &lt;%&ndash;  <form:form class="form-signin" name='editappUser' method="POST" action="/get/${appUser.id}"
+                                 modelAttribute="appUser">&ndash;%&gt;
+            <form:form class="form-signin" name='appUser' method="POST" action="addAppUser.html"
+                       modelAttribute="appUser">
+                <c:if test="${not empty success}">
+                    <div class="alert alert-primary container col-8 text-center" role="alert">
+                        <spring:message code="${success}"/>
+                    </div>
+                </c:if>
+                <c:if test="${not empty deleted}">
+                    <div class="alert alert-danger container col-8 text-center" role="alert">
+                        <spring:message code="${deleted}"/>
+                    </div>
+                </c:if>
+
+
+                <div class="form-label-group">
+                    <form:input path="name" type="text" id="name" name="name" class="form-control" placeholder="name"
+                                required=""
+                                autofocus=""/>
+                    <form:label path="name" for="name"><spring:message code="editProfile.firstName"/></form:label>
+                    <form:errors path="name"/>
+                </div>
+                <div class="form-label-group">
+                    <form:input path="surname" type="text" id="surname" name="surname" class="form-control"
+                                placeholder="surname" required=""
+                                autofocus=""/>
+                    <form:label path="surname" for="surname"><spring:message code="editProfile.lastName"/></form:label>
+                    <form:errors path="lastName"/>
+                </div>
+                <div class="form-label-group">
+                    <form:input path="pesel" type="number" min="10000000000" max="99999999999" size="11" maxlength="11"
+                                id="pesel" name="pesel" class="form-control" placeholder="Pesel" required=""
+                                autofocus=""/>
+                    <form:label path="pesel" for="pesel"><spring:message code="editProfile.pesel"/></form:label>
+                    <form:errors path="pesel"/>
+                </div>
+                <div class="form-label-group">
+                    <form:input path="phoneNumber" type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+                                placeholder="phoneNumber" required=""
+                                autofocus=""/>
+                    <form:label path="phoneNumber" for="phoneNumber"><spring:message
+                            code="editProfile.telephone"/></form:label>
+                    <form:errors path="phoneNumber"/>
+                </div>
+            </form:form>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message
+                    code="editProfile.title"/></button>
+
+        </div>--%>
+        <%--</form:form>--%>
+        <%--        <form:form class="form-signin" name='editAppUser' method="POST" action="/get/${editAppUser.id}"
+                           modelAttribute="editAppUser">
+                    <div class="form-label-group">
+                        <form:input path="name" type="text" id="name" name="name" class="form-control"
+                                    placeholder="name" required=""
+                                    autofocus=""/>
+                        <form:label path="name" for="name"><spring:message code="label.name"/></form:label>
+                        <form:errors path="name"/>
+                    </div>
+                    <div class="form-label-group">
+                        <form:input path="surname" type="text" id="surname" name="surname" class="form-control"
+                                    placeholder="surname" required=""
+                                    autofocus=""/>
+                        <form:label path="surname" for="surname"><spring:message code="label.surname"/></form:label>
+                        <form:errors path="surname"/>
+                    </div>
+                    <div class="form-label-group">
+                        <form:input path="phoneNumber" type="number" id="phoneNumber" name="phoneNumber"
+                                    class="form-control"
+                                    placeholder="email" required=""
+                                    autofocus=""/>
+                        <form:label path="phoneNumber" for="phoneNumber"><spring:message code="label.phoneNumber"/></form:label>
+                        <form:errors path="phoneNumber"/>
+                    </div>
+                    <div class="form-label-group">
+                        <form:input path="pesel" type="number" id="pesel" name="pesel" class="form-control"
+                                    placeholder="pesel" required=""
+                                    autofocus=""/>
+                        <form:label path="pesel" for="pesel"><spring:message code="label.pesel"/></form:label>
+                        <form:errors path="pesel"/>
+                    </div>
+                    <tr>
+                        <td colspan="2">
+                            <c:if test="${appUser.id==0}">
+                                <input type="submit" value="<spring:message code="label.addAppUser"/>"/>
+                            </c:if>
+                            <c:if test="${appUser.id!=0}">
+                                <input type="submit" value="<spring:message code="label.editAppUser"/>"/>
+                            </c:if>
+                        </td>
+                    </tr>
+                    <form:form class="form-signin" name='appUserEditProfile' method="POST"
+                               action="/delete/${appUser.id}">
+                        <button class="btn btn-lg btn-primary btn-block m-0" type="submit"><spring:message
+                                code="label.editAppUser"/></button>
+                    </form:form>
+                </form:form>
+            </section>
+        </main>--%>
+
+    </section>
+</main>

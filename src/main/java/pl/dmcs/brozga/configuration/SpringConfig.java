@@ -44,16 +44,6 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
 
-//    @Bean
-//    public InternalResourceViewResolver viewResolver(){
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/");
-//        viewResolver.setSuffix(".jsp");
-//        return viewResolver;
-//    }
-
-
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -94,35 +84,13 @@ public class SpringConfig implements WebMvcConfigurer {
         return bean;
     }
 
-/*    @Resource(name = "addressService")
-    private AddressService addressService;*/
-
-/*    @Resource(name = "appUserRoleService")
-    private AppUserRoleService appUserRoleService;*/
 
     @Override
     public void addFormatters(FormatterRegistry formatterRegistry) {
-        // formatterRegistry.addConverter(getMyAddressConverter());
-        //formatterRegistry.addConverter(getMyUserRoleConverter());
-        //formatterRegistry.addConverter(getMyUserRoleListConverter());
     }
 
 
-/*    @Bean
-    public AddressConverter getMyAddressConverter() {
 
-        return new AddressConverter(addressService);
-    }
-
-    @Bean
-    public AppUserRoleConverter getMyUserRoleConverter() {
-        return new AppUserRoleConverter(appUserRoleService);
-    }
-
-    @Bean
-    public AppUserRoleListConverter getMyUserRoleListConverter() {
-        return new AppUserRoleListConverter(appUserRoleService);
-    }*/
 
 }
 

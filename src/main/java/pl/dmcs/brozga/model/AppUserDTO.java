@@ -9,18 +9,8 @@ public class AppUserDTO {
     private String surname;
     private String phoneNumber;
     private Long pesel;
-    private Set<String> appUserRole = new HashSet<>(0);
 
-
-    public Set<String> getAppUserRole() {
-        return appUserRole;
-    }
-
-    public void setAppUserRole(Set<String> appUserRole) {
-        this.appUserRole = appUserRole;
-    }
-
-
+    
     public String getName() {
         return name;
     }
