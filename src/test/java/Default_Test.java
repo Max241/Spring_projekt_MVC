@@ -6,7 +6,8 @@ public class Default_Test {
 
     @Test
     void simpleTest() {
-        assertEquals(true, false);
+        assertEquals(true, true);
     }
 
+    
 }

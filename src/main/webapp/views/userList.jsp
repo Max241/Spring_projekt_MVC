@@ -33,7 +33,7 @@
                             <div class="btn-group" role="group" aria-label="">
                                 <a href="/appUsers/get/${appUser.id}" class="btn btn-lg btn-primary"
                                    role="button"><spring:message
-                                        code="label.pdf"/> </button></a>
+                                        code="label.edit"/> </button></a>
                                 <form:form class="form-signin" name='generatePdf' method="GET"
                                            action="/generatePdf-${appUser.id}">
                                     <button class="btn btn-lg btn-info" type="submit"><spring:message

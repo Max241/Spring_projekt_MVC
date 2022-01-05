@@ -93,12 +93,14 @@ public class AppUserController {
         appUserService.removeAppUser(appUserId);
         return "redirect:/appUsers";
     }
-
+    
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/register")
     public ModelAndView register() {
         return new ModelAndView("register", "register", new AppUser());
     }
 
+    @PreAuthorize("isAnonymous()")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerPost(@Valid @ModelAttribute("register") AppUser appUser, BindingResult result, HttpServletRequest request) {
         appUserValidator.validate(appUser, result);

@@ -13,4 +13,6 @@ public interface AppUserRoleRepo extends JpaRepository<AppUserRole, Long> {
     Optional<AppUserRole> findByRole(String role);
 
     AppUserRole findById(Long id);
+
+    AppUserRole existsByRole(String role);
 }

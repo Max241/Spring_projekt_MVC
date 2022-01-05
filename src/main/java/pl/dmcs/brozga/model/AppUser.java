@@ -12,7 +12,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "appuser") //Table name if not name of class will be used
+//@Table(name = "appuser") //Table name if not name of class will be used
 public class AppUser {
 
     @Id
@@ -168,6 +168,11 @@ public class AppUser {
 
     public void setVisitHours(Set<VisitHours> visitHours) {
         this.visitHours = visitHours;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + surname + " " + email;
     }
 }
 
