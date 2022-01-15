@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppUserModel {
 
     @Test
-    void appUserEqualsToString() {
+    void testAppUserEqualsToString() {
         AppUser appUser = new AppUser();
         appUser.setName("Doctor");
         appUser.setSurname("Good");

@@ -114,9 +114,10 @@ public class AppUserServiceImpl implements AppUserService {
         return UUID.randomUUID().toString();
     }
 
-    @Transactional
+    @Override
     public AppUser findByEmail(String email) {
-        return appUserRepo.findByEmail(email);
+        AppUser appUser = appUserRepo.findByEmail(email);
+        return appUser;
     }
 
     @Transactional
@@ -131,7 +132,8 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Transactional
     public AppUser getAppUser(long id) {
-        return appUserRepo.findById(id);
+        Optional<AppUser> appUser = appUserRepo.findById(id);
+        return appUser.orElse(null);
     }
 
     private String hashPassword(String password) {

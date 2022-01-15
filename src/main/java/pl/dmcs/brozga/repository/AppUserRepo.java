@@ -22,7 +22,7 @@ public interface AppUserRepo extends JpaRepository<AppUser, Long> {
 
     boolean existsByLogin(String login);
 
-    AppUser findById(Long id);
+    Optional<AppUser> findById(Long id);
 
     AppUser findByEmail(String email);
 
